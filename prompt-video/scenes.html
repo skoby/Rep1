@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>מה זה פרומפט</title>
+<style>
+  @font-face { font-family: Heebo; font-weight: 400; src: url(fonts/heebo400.ttf); }
+  @font-face { font-family: Heebo; font-weight: 700; src: url(fonts/heebo700.ttf); }
+  @font-face { font-family: Heebo; font-weight: 900; src: url(fonts/heebo900.ttf); }
+  :root {
+    --bg1: #0f1530; --bg2: #1d2a5c; --ink: #f4f6ff; --muted: #aab3d8;
+    --accent: #ffb547; --good: #4fd69c; --bad: #ff6b81; --card: rgba(255,255,255,0.07);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 720px; overflow: hidden; }
+  body {
+    font-family: Heebo, 'Noto Color Emoji', sans-serif; color: var(--ink);
+    background: radial-gradient(ellipse at 30% 20%, var(--bg2), var(--bg1) 70%);
+    position: relative;
+  }
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .35; }
+  #b1 { width: 420px; height: 420px; background: #5b6cff; }
+  #b2 { width: 360px; height: 360px; background: #ff7ab8; }
+  .scene { position: absolute; inset: 0; display: flex; flex-direction: column;
+           align-items: center; justify-content: center; padding: 60px 90px; opacity: 0; text-align: center; }
+  h1 { font-size: 96px; font-weight: 900; line-height: 1.1; }
+  h2 { font-size: 54px; font-weight: 900; margin-bottom: 28px; }
+  .sub { font-size: 30px; color: var(--muted); margin-top: 18px; }
+  .hl { color: var(--accent); }
+  .emoji { font-size: 110px; line-height: 1; margin-bottom: 20px; }
+
+  /* chat window */
+  .chat { width: 900px; background: var(--card); border: 1px solid rgba(255,255,255,.12);
+          border-radius: 24px; padding: 28px; text-align: right; }
+  .bubble { display: inline-block; max-width: 85%; padding: 18px 24px; border-radius: 20px;
+            font-size: 30px; line-height: 1.45; min-height: 1.45em; }
+  .me { background: #3b5bff; border-bottom-right-radius: 6px; }
+  .ai { background: rgba(255,255,255,.12); border-bottom-left-radius: 6px; }
+  .row { display: flex; margin: 10px 0; }
+  .row.left { justify-content: flex-end; }
+  .caret { display: inline-block; width: 3px; height: 1.1em; background: var(--ink);
+           vertical-align: middle; margin-right: 3px; }
+  .label { font-size: 22px; color: var(--muted); margin-bottom: 6px; }
+  .def { font-size: 40px; font-weight: 700; margin-top: 34px; line-height: 1.4; }
+
+  /* compare */
+  .cards { display: flex; gap: 40px; width: 100%; justify-content: center; }
+  .card { width: 520px; background: var(--card); border-radius: 24px; padding: 30px;
+          text-align: right; border: 2px solid transparent; }
+  .card.bad { border-color: var(--bad); }
+  .card.good { border-color: var(--good); }
+  .card .tag { font-size: 26px; font-weight: 900; margin-bottom: 14px; }
+  .bad .tag { color: var(--bad); } .good .tag { color: var(--good); }
+  .card .prompt { font-size: 28px; line-height: 1.5; background: rgba(0,0,0,.25);
+                  border-radius: 14px; padding: 16px 20px; min-height: 190px; }
+  .card .result { font-size: 26px; margin-top: 18px; color: var(--muted); }
+
+  /* ingredients */
+  .grid { display: grid; grid-template-columns: repeat(4, 250px); gap: 26px; }
+  .ing { background: var(--card); border-radius: 22px; padding: 28px 18px; }
+  .ing .ic { font-size: 64px; }
+  .ing .t { font-size: 36px; font-weight: 900; margin: 10px 0 8px; color: var(--accent); }
+  .ing .d { font-size: 22px; color: var(--muted); line-height: 1.4; }
+
+  #progress { position: absolute; bottom: 0; right: 0; height: 6px; background: var(--accent); }
+</style>
+</head>
+<body>
+<div class="blob" id="b1"></div>
+<div class="blob" id="b2"></div>
+
+<!-- 1: title -->
+<section class="scene" id="s1">
+  <div class="emoji" id="s1e">💬</div>
+  <h1 id="s1t">מה זה <span class="hl">פרומפט</span>?</h1>
+  <p class="sub" id="s1s">הסבר קצר ופשוט</p>
+</section>
+
+<!-- 2: definition -->
+<section class="scene" id="s2">
+  <div class="chat">
+    <div class="label">אתם:</div>
+    <div class="row"><div class="bubble me"><span id="s2q"></span><span class="caret" id="s2c"></span></div></div>
+    <div class="row left"><div class="bubble ai" id="s2a"></div></div>
+  </div>
+  <p class="def" id="s2d"><span class="hl">פרומפט</span> = ההוראה או השאלה<br>שאנחנו כותבים לבינה מלאכותית</p>
+</section>
+
+<!-- 3: analogy -->
+<section class="scene" id="s3">
+  <div class="emoji" id="s3e">🍽️</div>
+  <h2 id="s3t">זה כמו להזמין במסעדה</h2>
+  <p class="sub" id="s3a">"תביא משהו לאכול" ← תקבלו משהו... אולי 🤷</p>
+  <p class="sub" id="s3b">"פסטה ברוטב עגבניות, בלי חריף, מנה קטנה" ← בדיוק מה שרציתם 😋</p>
+  <p class="def" id="s3c">ככל שההוראה <span class="hl">ברורה יותר</span> — התוצאה טובה יותר</p>
+</section>
+
+<!-- 4: weak vs strong -->
+<section class="scene" id="s4">
+  <h2 id="s4t">פרומפט חלש מול פרומפט חזק</h2>
+  <div class="cards">
+    <div class="card bad" id="s4bad">
+      <div class="tag">❌ חלש</div>
+      <div class="prompt" id="s4bp"></div>
+      <div class="result" id="s4br">← תשובה כללית ולא ממוקדת</div>
+    </div>
+    <div class="card good" id="s4good">
+      <div class="tag">✅ חזק</div>
+      <div class="prompt" id="s4gp"></div>
+      <div class="result" id="s4gr">← תשובה מדויקת, בדיוק למה שרציתם 🎯</div>
+    </div>
+  </div>
+</section>
+
+<!-- 5: ingredients -->
+<section class="scene" id="s5">
+  <h2 id="s5t">4 מרכיבים של פרומפט טוב</h2>
+  <div class="grid">
+    <div class="ing" id="i1"><div class="ic">🎯</div><div class="t">מטרה</div><div class="d">מה בדיוק אני רוצה לקבל?</div></div>
+    <div class="ing" id="i2"><div class="ic">📚</div><div class="t">הקשר</div><div class="d">למי זה מיועד ובאיזה מצב?</div></div>
+    <div class="ing" id="i3"><div class="ic">📋</div><div class="t">פורמט</div><div class="d">רשימה, פסקה, טבלה?</div></div>
+    <div class="ing" id="i4"><div class="ic">🎨</div><div class="t">טון</div><div class="d">רשמי, מצחיק, פשוט?</div></div>
+  </div>
+</section>
+
+<!-- 6: summary -->
+<section class="scene" id="s6">
+  <div class="emoji" id="s6e">✨</div>
+  <h1 id="s6t" style="font-size:80px">פרומפט טוב = <span class="hl">תוצאה טובה</span></h1>
+  <p class="sub" id="s6s">עכשיו תורכם — נסו לכתוב פרומפט ברור ומפורט!</p>
+</section>
+
+<div id="progress"></div>
+
+<script>
+const DURATION = 46;
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = x => 1 - Math.pow(1 - clamp(x), 3);
+// opacity of a scene visible in [s, e] with fade in/out
+const win = (t, s, e, f = 0.5) => clamp((t - s) / f) * clamp((e - t) / f);
+function rise(el, t, s, d = 0.6, dist = 30) {
+  const p = ease((t - s) / d);
+  el.style.opacity = p;
+  el.style.transform = `translateY(${(1 - p) * dist}px)`;
+}
+function pop(el, t, s, d = 0.5) {
+  const p = ease((t - s) / d);
+  el.style.opacity = p;
+  el.style.transform = `scale(${0.6 + 0.4 * p})`;
+}
+function typeText(el, text, t, s, cps = 16) {
+  const chars = Array.from(text);
+  el.textContent = chars.slice(0, Math.floor(clamp((t - s) * cps, 0, chars.length))).join('');
+  return (t - s) * cps >= chars.length;
+}
+
+const Q = 'תכתוב לי שיר קצר על הים';
+const A = 'הגלים לוחשים לחוף בשקט, השמש שוקעת בכתום... 🌊';
+const WEAK = 'תכתוב על כלבים';
+const STRONG = 'כתוב פסקה קצרה ומצחיקה לילדים בני 8 על למה כלבים אוהבים לשחק בכדור';
+
+function render(t) {
+  $('b1').style.transform = `translate(${-200 + 120 * Math.sin(t / 4)}px, ${-120 + 80 * Math.cos(t / 5)}px)`;
+  $('b2').style.transform = `translate(${900 + 100 * Math.cos(t / 3.5)}px, ${380 + 70 * Math.sin(t / 4.5)}px)`;
+  $('progress').style.width = `${(t / DURATION) * 100}%`;
+
+  // 1: title 0-5
+  $('s1').style.opacity = win(t, 0, 5);
+  pop($('s1e'), t, 0.2);
+  rise($('s1t'), t, 0.5);
+  rise($('s1s'), t, 1.2);
+
+  // 2: definition 5-13
+  $('s2').style.opacity = win(t, 5, 13);
+  const typed = typeText($('s2q'), Q, t, 5.6);
+  $('s2c').style.opacity = typed ? 0 : (Math.floor(t * 3) % 2);
+  typeText($('s2a'), A, t, 7.6, 22);
+  $('s2a').parentElement.style.opacity = t > 7.4 ? 1 : 0;
+  rise($('s2d'), t, 10);
+
+  // 3: analogy 13-21
+  $('s3').style.opacity = win(t, 13, 21);
+  pop($('s3e'), t, 13.2);
+  rise($('s3t'), t, 13.5);
+  rise($('s3a'), t, 14.8);
+  rise($('s3b'), t, 16.6);
+  rise($('s3c'), t, 18.4);
+
+  // 4: weak vs strong 21-32
+  $('s4').style.opacity = win(t, 21, 32);
+  rise($('s4t'), t, 21.2);
+  rise($('s4bad'), t, 21.8);
+  typeText($('s4bp'), WEAK, t, 22.4, 14);
+  rise($('s4br'), t, 24.0);
+  rise($('s4good'), t, 25.0);
+  typeText($('s4gp'), STRONG, t, 25.6, 20);
+  rise($('s4gr'), t, 29.4);
+
+  // 5: ingredients 32-40.5
+  $('s5').style.opacity = win(t, 32, 40.5);
+  rise($('s5t'), t, 32.2);
+  ['i1', 'i2', 'i3', 'i4'].forEach((id, i) => rise($(id), t, 33.2 + i * 1.3, 0.6, 50));
+
+  // 6: summary 40.5-46
+  $('s6').style.opacity = win(t, 40.5, DURATION + 1);
+  pop($('s6e'), t, 40.8);
+  rise($('s6t'), t, 41.1);
+  rise($('s6s'), t, 42.2);
+}
+window.DURATION = DURATION;
+window.render = render;
+
+// Live preview when opened directly in a browser
+if (!navigator.webdriver) {
+  const t0 = performance.now();
+  (function loop() { render(((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); })();
+} else {
+  render(0);
+}
+</script>
+</body>
+</html>
