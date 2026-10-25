@@ -1,0 +1,20 @@
+window.CUES = [
+  [0.6, 3.4, "מה זה בעצם פרומפט?", "So, what exactly is a prompt?"],
+  [3.4, 6.0, "בואו נבין את זה בדקה אחת.", "Let's figure it out in one minute."],
+  [6.3, 9.6, "כשאנחנו כותבים לבינה מלאכותית, למשל בצ׳אט,", "When we write to an AI, for example in a chat,"],
+  [9.6, 12.6, "ההודעה שאנחנו שולחים נקראת פרומפט.", "the message we send is called a prompt."],
+  [12.6, 15.8, "פרומפט הוא ההוראה או השאלה שאנחנו נותנים לה.", "A prompt is the instruction or question we give it."],
+  [16.3, 19.3, "זה קצת כמו להזמין אוכל במסעדה.", "It's a bit like ordering food at a restaurant."],
+  [19.3, 22.5, "הזמנה כללית – ותקבלו מה שיצא.", "Order something vague, and you get whatever comes."],
+  [22.5, 25.8, "הזמנה מדויקת – ותקבלו בדיוק את מה שרציתם.", "Order precisely, and you get exactly what you wanted."],
+  [26.3, 29.4, "ככה זה גם עם בינה מלאכותית:", "It works the same way with AI."],
+  [29.4, 32.9, "פרומפט כללי מקבל תשובה כללית.", "A vague prompt gets a vague answer."],
+  [32.9, 38.7, "פרומפט מפורט – עם קהל, אורך וסגנון – מקבל תשובה מדויקת.", "A detailed prompt, with an audience, a length, and a style, gets a precise answer."],
+  [39.3, 42.3, "לפרומפט טוב יש בדרך כלל ארבעה מרכיבים:", "A good prompt usually has four ingredients."],
+  [42.3, 44.9, "מטרה – מה אני רוצה לקבל,", "Goal: what do I want to get?"],
+  [44.9, 47.5, "הקשר – למי זה מיועד,", "Context: who is it for?"],
+  [47.5, 50.1, "פורמט – רשימה, פסקה או טבלה,", "Format: a list, a paragraph, or a table?"],
+  [50.1, 52.7, "וטון – רשמי, מצחיק או פשוט.", "And tone: formal, funny, or simple?"],
+  [53.3, 56.4, "בקיצור: פרומפט טוב = תוצאה טובה.", "In short: a good prompt means a good result."],
+  [56.4, 59.4, "עכשיו תורכם – נסו בעצמכם!", "Now it's your turn. Give it a try!"]
+];

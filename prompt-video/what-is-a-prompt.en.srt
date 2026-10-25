@@ -1,0 +1,71 @@
+1
+00:00:00,600 --> 00:00:03,400
+So, what exactly is a prompt?
+
+2
+00:00:03,400 --> 00:00:06,000
+Let's figure it out in one minute.
+
+3
+00:00:06,300 --> 00:00:09,600
+When we write to an AI, for example in a chat,
+
+4
+00:00:09,600 --> 00:00:12,600
+the message we send is called a prompt.
+
+5
+00:00:12,600 --> 00:00:15,800
+A prompt is the instruction or question we give it.
+
+6
+00:00:16,300 --> 00:00:19,300
+It's a bit like ordering food at a restaurant.
+
+7
+00:00:19,300 --> 00:00:22,500
+Order something vague, and you get whatever comes.
+
+8
+00:00:22,500 --> 00:00:25,800
+Order precisely, and you get exactly what you wanted.
+
+9
+00:00:26,300 --> 00:00:29,400
+It works the same way with AI.
+
+10
+00:00:29,400 --> 00:00:32,900
+A vague prompt gets a vague answer.
+
+11
+00:00:32,900 --> 00:00:38,700
+A detailed prompt, with an audience, a length, and a style, gets a precise answer.
+
+12
+00:00:39,300 --> 00:00:42,300
+A good prompt usually has four ingredients.
+
+13
+00:00:42,300 --> 00:00:44,900
+Goal: what do I want to get?
+
+14
+00:00:44,900 --> 00:00:47,500
+Context: who is it for?
+
+15
+00:00:47,500 --> 00:00:50,100
+Format: a list, a paragraph, or a table?
+
+16
+00:00:50,100 --> 00:00:52,700
+And tone: formal, funny, or simple?
+
+17
+00:00:53,300 --> 00:00:56,400
+In short: a good prompt means a good result.
+
+18
+00:00:56,400 --> 00:00:59,400
+Now it's your turn. Give it a try!
