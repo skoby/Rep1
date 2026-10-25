@@ -8,8 +8,8 @@
   @font-face { font-family: Heebo; font-weight: 700; src: url(fonts/heebo700.ttf); }
   @font-face { font-family: Heebo; font-weight: 900; src: url(fonts/heebo900.ttf); }
   :root {
-    --bg1: #0f1530; --bg2: #1d2a5c; --ink: #f4f6ff; --muted: #aab3d8;
-    --accent: #ffb547; --good: #4fd69c; --bad: #ff6b81; --card: rgba(255,255,255,0.07);
+    --bg1: #0f1530; --bg2: #1d2a5c; --ink: #f4f6ff; --muted: #c3cae8;
+    --accent: #ffb547; --good: #4fd69c; --bad: #ff6b81; --card: rgba(255,255,255,0.08);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 1280px; height: 720px; overflow: hidden; }
@@ -21,48 +21,59 @@
   .blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .35; }
   #b1 { width: 420px; height: 420px; background: #5b6cff; }
   #b2 { width: 360px; height: 360px; background: #ff7ab8; }
+  /* bottom padding keeps scene content clear of the subtitle bar */
   .scene { position: absolute; inset: 0; display: flex; flex-direction: column;
-           align-items: center; justify-content: center; padding: 60px 90px; opacity: 0; text-align: center; }
-  h1 { font-size: 96px; font-weight: 900; line-height: 1.1; }
-  h2 { font-size: 54px; font-weight: 900; margin-bottom: 28px; }
-  .sub { font-size: 30px; color: var(--muted); margin-top: 18px; }
+           align-items: center; justify-content: center; padding: 40px 80px 150px; opacity: 0; text-align: center; }
+  h1 { font-size: 92px; font-weight: 900; line-height: 1.1; }
+  h2 { font-size: 52px; font-weight: 900; margin-bottom: 26px; }
+  .sub { font-size: 30px; color: var(--muted); margin-top: 16px; }
   .hl { color: var(--accent); }
-  .emoji { font-size: 110px; line-height: 1; margin-bottom: 20px; }
+  .emoji { font-size: 100px; line-height: 1; margin-bottom: 18px; }
 
   /* chat window */
-  .chat { width: 900px; background: var(--card); border: 1px solid rgba(255,255,255,.12);
-          border-radius: 24px; padding: 28px; text-align: right; }
-  .bubble { display: inline-block; max-width: 85%; padding: 18px 24px; border-radius: 20px;
+  .chat { width: 880px; background: var(--card); border: 1px solid rgba(255,255,255,.12);
+          border-radius: 24px; padding: 24px 28px; text-align: right; }
+  .bubble { display: inline-block; max-width: 85%; padding: 16px 24px; border-radius: 20px;
             font-size: 30px; line-height: 1.45; min-height: 1.45em; }
   .me { background: #3b5bff; border-bottom-right-radius: 6px; }
-  .ai { background: rgba(255,255,255,.12); border-bottom-left-radius: 6px; }
-  .row { display: flex; margin: 10px 0; }
+  .ai { background: rgba(255,255,255,.14); border-bottom-left-radius: 6px; }
+  .row { display: flex; margin: 8px 0; }
   .row.left { justify-content: flex-end; }
   .caret { display: inline-block; width: 3px; height: 1.1em; background: var(--ink);
            vertical-align: middle; margin-right: 3px; }
-  .label { font-size: 22px; color: var(--muted); margin-bottom: 6px; }
-  .def { font-size: 40px; font-weight: 700; margin-top: 34px; line-height: 1.4; }
+  .label { font-size: 24px; color: var(--muted); margin: 4px 0; }
+  .tagline { display: inline-block; margin-top: 4px; font-size: 22px; font-weight: 700; color: #1a1f3a;
+             background: var(--accent); border-radius: 8px; padding: 2px 12px; }
+  .def { font-size: 40px; font-weight: 700; margin-top: 28px; line-height: 1.4; }
 
   /* compare */
-  .cards { display: flex; gap: 40px; width: 100%; justify-content: center; }
-  .card { width: 520px; background: var(--card); border-radius: 24px; padding: 30px;
+  .cards { display: flex; gap: 36px; width: 100%; justify-content: center; }
+  .card { width: 520px; background: var(--card); border-radius: 24px; padding: 26px 28px;
           text-align: right; border: 2px solid transparent; }
   .card.bad { border-color: var(--bad); }
   .card.good { border-color: var(--good); }
-  .card .tag { font-size: 26px; font-weight: 900; margin-bottom: 14px; }
+  .card .tag { font-size: 28px; font-weight: 900; margin-bottom: 12px; }
   .bad .tag { color: var(--bad); } .good .tag { color: var(--good); }
   .card .prompt { font-size: 28px; line-height: 1.5; background: rgba(0,0,0,.25);
-                  border-radius: 14px; padding: 16px 20px; min-height: 190px; }
-  .card .result { font-size: 26px; margin-top: 18px; color: var(--muted); }
+                  border-radius: 14px; padding: 14px 20px; min-height: 140px; }
+  .card .result { font-size: 26px; margin-top: 16px; color: var(--muted); }
 
   /* ingredients */
-  .grid { display: grid; grid-template-columns: repeat(4, 250px); gap: 26px; }
-  .ing { background: var(--card); border-radius: 22px; padding: 28px 18px; }
-  .ing .ic { font-size: 64px; }
-  .ing .t { font-size: 36px; font-weight: 900; margin: 10px 0 8px; color: var(--accent); }
-  .ing .d { font-size: 22px; color: var(--muted); line-height: 1.4; }
+  .grid { display: grid; grid-template-columns: repeat(4, 255px); gap: 24px; }
+  .ing { background: var(--card); border-radius: 22px; padding: 24px 16px; border: 2px solid transparent; }
+  .ing.on { border-color: var(--accent); }
+  .ing .ic { font-size: 60px; }
+  .ing .t { font-size: 38px; font-weight: 900; margin: 8px 0 6px; color: var(--accent); }
+  .ing .d { font-size: 26px; color: var(--muted); line-height: 1.35; }
+
+  /* subtitles: ~54px tall text at 1080p, high-contrast box */
+  #subs { position: absolute; left: 0; right: 0; bottom: 34px; display: flex; justify-content: center; }
+  #subtext { max-width: 1140px; font-size: 36px; font-weight: 700; line-height: 1.35;
+             background: rgba(5, 8, 22, .78); color: #fff; padding: 10px 28px; border-radius: 14px;
+             text-align: center; opacity: 0; }
 
   #progress { position: absolute; bottom: 0; right: 0; height: 6px; background: var(--accent); }
+  #fade { position: absolute; inset: 0; background: #000; pointer-events: none; }
 </style>
 </head>
 <body>
@@ -73,14 +84,15 @@
 <section class="scene" id="s1">
   <div class="emoji" id="s1e">💬</div>
   <h1 id="s1t">מה זה <span class="hl">פרומפט</span>?</h1>
-  <p class="sub" id="s1s">הסבר קצר ופשוט</p>
+  <p class="sub" id="s1s">הסבר קצר בדקה אחת</p>
 </section>
 
 <!-- 2: definition -->
 <section class="scene" id="s2">
   <div class="chat">
-    <div class="label">אתם:</div>
+    <div class="label">אתם כותבים: <span class="tagline" id="s2tag">זה הפרומפט 👇</span></div>
     <div class="row"><div class="bubble me"><span id="s2q"></span><span class="caret" id="s2c"></span></div></div>
+    <div class="label" id="s2al">הבינה המלאכותית עונה:</div>
     <div class="row left"><div class="bubble ai" id="s2a"></div></div>
   </div>
   <p class="def" id="s2d"><span class="hl">פרומפט</span> = ההוראה או השאלה<br>שאנחנו כותבים לבינה מלאכותית</p>
@@ -91,8 +103,8 @@
   <div class="emoji" id="s3e">🍽️</div>
   <h2 id="s3t">זה כמו להזמין במסעדה</h2>
   <p class="sub" id="s3a">"תביא משהו לאכול" ← תקבלו משהו... אולי 🤷</p>
-  <p class="sub" id="s3b">"פסטה ברוטב עגבניות, בלי חריף, מנה קטנה" ← בדיוק מה שרציתם 😋</p>
-  <p class="def" id="s3c">ככל שההוראה <span class="hl">ברורה יותר</span> — התוצאה טובה יותר</p>
+  <p class="sub" id="s3b">"פסטה ברוטב עגבניות, בלי חריף" ← בדיוק מה שרציתם 😋</p>
+  <p class="def" id="s3c">הוראה <span class="hl">ברורה</span> = תוצאה <span class="hl">טובה</span></p>
 </section>
 
 <!-- 4: weak vs strong -->
@@ -107,7 +119,7 @@
     <div class="card good" id="s4good">
       <div class="tag">✅ חזק</div>
       <div class="prompt" id="s4gp"></div>
-      <div class="result" id="s4gr">← תשובה מדויקת, בדיוק למה שרציתם 🎯</div>
+      <div class="result" id="s4gr">← תשובה מדויקת 🎯</div>
     </div>
   </div>
 </section>
@@ -116,8 +128,8 @@
 <section class="scene" id="s5">
   <h2 id="s5t">4 מרכיבים של פרומפט טוב</h2>
   <div class="grid">
-    <div class="ing" id="i1"><div class="ic">🎯</div><div class="t">מטרה</div><div class="d">מה בדיוק אני רוצה לקבל?</div></div>
-    <div class="ing" id="i2"><div class="ic">📚</div><div class="t">הקשר</div><div class="d">למי זה מיועד ובאיזה מצב?</div></div>
+    <div class="ing" id="i1"><div class="ic">🎯</div><div class="t">מטרה</div><div class="d">מה אני רוצה לקבל?</div></div>
+    <div class="ing" id="i2"><div class="ic">📚</div><div class="t">הקשר</div><div class="d">למי זה מיועד?</div></div>
     <div class="ing" id="i3"><div class="ic">📋</div><div class="t">פורמט</div><div class="d">רשימה, פסקה, טבלה?</div></div>
     <div class="ing" id="i4"><div class="ic">🎨</div><div class="t">טון</div><div class="d">רשמי, מצחיק, פשוט?</div></div>
   </div>
@@ -127,17 +139,41 @@
 <section class="scene" id="s6">
   <div class="emoji" id="s6e">✨</div>
   <h1 id="s6t" style="font-size:80px">פרומפט טוב = <span class="hl">תוצאה טובה</span></h1>
-  <p class="sub" id="s6s">עכשיו תורכם — נסו לכתוב פרומפט ברור ומפורט!</p>
+  <p class="sub" id="s6s">נסו בעצמכם!</p>
 </section>
 
+<div id="subs"><div id="subtext"></div></div>
 <div id="progress"></div>
+<div id="fade"></div>
 
 <script>
-const DURATION = 46;
+const DURATION = 60;
+// Narration subtitles: [start, end, text]. Also exported to .srt by render.js.
+const CUES = [
+  [0.6, 3.4, 'מה זה בעצם פרומפט?'],
+  [3.4, 6.0, 'בואו נבין את זה בדקה אחת.'],
+  [6.3, 9.6, 'כשאנחנו כותבים לבינה מלאכותית, למשל בצ׳אט,'],
+  [9.6, 12.6, 'ההודעה שאנחנו שולחים נקראת פרומפט.'],
+  [12.6, 15.8, 'פרומפט הוא ההוראה או השאלה שאנחנו נותנים לה.'],
+  [16.3, 19.3, 'זה קצת כמו להזמין אוכל במסעדה.'],
+  [19.3, 22.5, 'הזמנה כללית – ותקבלו מה שיצא.'],
+  [22.5, 25.8, 'הזמנה מדויקת – ותקבלו בדיוק את מה שרציתם.'],
+  [26.3, 29.4, 'ככה זה גם עם בינה מלאכותית:'],
+  [29.4, 32.9, 'פרומפט כללי מקבל תשובה כללית.'],
+  [32.9, 38.7, 'פרומפט מפורט – עם קהל, אורך וסגנון – מקבל תשובה מדויקת.'],
+  [39.3, 42.3, 'לפרומפט טוב יש בדרך כלל ארבעה מרכיבים:'],
+  [42.3, 44.9, 'מטרה – מה אני רוצה לקבל,'],
+  [44.9, 47.5, 'הקשר – למי זה מיועד,'],
+  [47.5, 50.1, 'פורמט – רשימה, פסקה או טבלה,'],
+  [50.1, 52.7, 'וטון – רשמי, מצחיק או פשוט.'],
+  [53.3, 56.4, 'בקיצור: פרומפט טוב = תוצאה טובה.'],
+  [56.4, 59.4, 'עכשיו תורכם – נסו בעצמכם!'],
+];
+
 const $ = id => document.getElementById(id);
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const ease = x => 1 - Math.pow(1 - clamp(x), 3);
-// opacity of a scene visible in [s, e] with fade in/out
+// opacity of something visible in [s, e] with fade in/out
 const win = (t, s, e, f = 0.5) => clamp((t - s) / f) * clamp((e - t) / f);
 function rise(el, t, s, d = 0.6, dist = 30) {
   const p = ease((t - s) / d);
@@ -156,59 +192,80 @@ function typeText(el, text, t, s, cps = 16) {
 }
 
 const Q = 'תכתוב לי שיר קצר על הים';
-const A = 'הגלים לוחשים לחוף בשקט, השמש שוקעת בכתום... 🌊';
+const A = '🌊 הגלים לוחשים לחוף, השמש שוקעת בכתום...';
 const WEAK = 'תכתוב על כלבים';
-const STRONG = 'כתוב פסקה קצרה ומצחיקה לילדים בני 8 על למה כלבים אוהבים לשחק בכדור';
+const STRONG = 'כתוב פסקה קצרה ומצחיקה לילדים בני 8 על למה כלבים אוהבים כדור';
 
 function render(t) {
   $('b1').style.transform = `translate(${-200 + 120 * Math.sin(t / 4)}px, ${-120 + 80 * Math.cos(t / 5)}px)`;
   $('b2').style.transform = `translate(${900 + 100 * Math.cos(t / 3.5)}px, ${380 + 70 * Math.sin(t / 4.5)}px)`;
   $('progress').style.width = `${(t / DURATION) * 100}%`;
+  $('fade').style.opacity = 1 - clamp(t / 0.6) * clamp((DURATION - t) / 0.8);
 
-  // 1: title 0-5
-  $('s1').style.opacity = win(t, 0, 5);
-  pop($('s1e'), t, 0.2);
-  rise($('s1t'), t, 0.5);
-  rise($('s1s'), t, 1.2);
+  // subtitles
+  const cue = CUES.find(([s, e]) => t >= s && t < e);
+  const sub = $('subtext');
+  if (cue) {
+    sub.textContent = cue[2];
+    // fade only at gaps between cues, not between back-to-back cues
+    const prevAdj = CUES.some(c => Math.abs(c[1] - cue[0]) < 0.01);
+    const nextAdj = CUES.some(c => Math.abs(c[0] - cue[1]) < 0.01);
+    sub.style.opacity = (prevAdj ? 1 : clamp((t - cue[0]) / 0.2)) * (nextAdj ? 1 : clamp((cue[1] - t) / 0.2));
+  } else {
+    sub.style.opacity = 0;
+  }
 
-  // 2: definition 5-13
-  $('s2').style.opacity = win(t, 5, 13);
-  const typed = typeText($('s2q'), Q, t, 5.6);
+  // 1: title 0-6
+  $('s1').style.opacity = win(t, 0, 6);
+  pop($('s1e'), t, 0.3);
+  rise($('s1t'), t, 0.6);
+  rise($('s1s'), t, 1.4);
+
+  // 2: definition 6-16
+  $('s2').style.opacity = win(t, 6, 16);
+  const typed = typeText($('s2q'), Q, t, 6.6);
   $('s2c').style.opacity = typed ? 0 : (Math.floor(t * 3) % 2);
-  typeText($('s2a'), A, t, 7.6, 22);
-  $('s2a').parentElement.style.opacity = t > 7.4 ? 1 : 0;
-  rise($('s2d'), t, 10);
+  $('s2al').style.opacity = t > 8.6 ? 1 : 0;
+  $('s2a').parentElement.style.opacity = t > 8.8 ? 1 : 0;
+  typeText($('s2a'), A, t, 8.9, 22);
+  pop($('s2tag'), t, 9.8);
+  rise($('s2d'), t, 12.6);
 
-  // 3: analogy 13-21
-  $('s3').style.opacity = win(t, 13, 21);
-  pop($('s3e'), t, 13.2);
-  rise($('s3t'), t, 13.5);
-  rise($('s3a'), t, 14.8);
-  rise($('s3b'), t, 16.6);
-  rise($('s3c'), t, 18.4);
+  // 3: analogy 16-26
+  $('s3').style.opacity = win(t, 16, 26);
+  pop($('s3e'), t, 16.4);
+  rise($('s3t'), t, 16.7);
+  rise($('s3a'), t, 19.3);
+  rise($('s3b'), t, 22.5);
+  rise($('s3c'), t, 24.2);
 
-  // 4: weak vs strong 21-32
-  $('s4').style.opacity = win(t, 21, 32);
-  rise($('s4t'), t, 21.2);
-  rise($('s4bad'), t, 21.8);
-  typeText($('s4bp'), WEAK, t, 22.4, 14);
-  rise($('s4br'), t, 24.0);
-  rise($('s4good'), t, 25.0);
-  typeText($('s4gp'), STRONG, t, 25.6, 20);
-  rise($('s4gr'), t, 29.4);
+  // 4: weak vs strong 26-39
+  $('s4').style.opacity = win(t, 26, 39);
+  rise($('s4t'), t, 26.4);
+  rise($('s4bad'), t, 29.0);
+  typeText($('s4bp'), WEAK, t, 29.5, 14);
+  rise($('s4br'), t, 31.2);
+  rise($('s4good'), t, 32.6);
+  typeText($('s4gp'), STRONG, t, 33.1, 18);
+  rise($('s4gr'), t, 37.0);
 
-  // 5: ingredients 32-40.5
-  $('s5').style.opacity = win(t, 32, 40.5);
-  rise($('s5t'), t, 32.2);
-  ['i1', 'i2', 'i3', 'i4'].forEach((id, i) => rise($(id), t, 33.2 + i * 1.3, 0.6, 50));
+  // 5: ingredients 39-53, each card lights up while its subtitle is shown
+  $('s5').style.opacity = win(t, 39, 53);
+  rise($('s5t'), t, 39.4);
+  [42.3, 44.9, 47.5, 50.1].forEach((s, i) => {
+    const el = $('i' + (i + 1));
+    rise(el, t, s, 0.6, 50);
+    el.classList.toggle('on', t >= s && t < s + 2.6);
+  });
 
-  // 6: summary 40.5-46
-  $('s6').style.opacity = win(t, 40.5, DURATION + 1);
-  pop($('s6e'), t, 40.8);
-  rise($('s6t'), t, 41.1);
-  rise($('s6s'), t, 42.2);
+  // 6: summary 53-60
+  $('s6').style.opacity = win(t, 53, DURATION + 1);
+  pop($('s6e'), t, 53.4);
+  rise($('s6t'), t, 53.7);
+  rise($('s6s'), t, 56.4);
 }
 window.DURATION = DURATION;
+window.CUES = CUES;
 window.render = render;
 
 // Live preview when opened directly in a browser
